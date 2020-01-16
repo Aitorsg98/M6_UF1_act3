@@ -5,48 +5,57 @@ import java.util.*;
 
 public class ConsultarFitxerAleatori {
 	public static void main(String[] args) throws IOException {
-		File fitxer = new File("llibres.txt");
-		//Crea un flux (stream) d'arxiu d'acc�s aleatori nom�s lectura
+		File fitxer = new File("persones.txt");
+		//Crea un flux (stream) d'arxiu d'accés aleatori només lectura
 		RandomAccessFile aleatoriFile = new RandomAccessFile(fitxer, "r");
 		
-		int apuntador, isbn, id, seleccio;
-		float preu;
-		char titol[] = new char[50], autor[] = new char[25], editorial[] = new char[30], aux;
-		//Demana a l'usuari que seleccioni el llibre pel seu identificador
-		System.out.print("Introdueixi el ID del llibre a consultar: ");
+		int apuntador, id, seleccio;
+		char nom[] = new char[20], cognom[] = new char[30], edat[] = new char[3], alçada[] = new char[4], pes[] = new char[4], aux;
+		//Demana a l'usuari que seleccioni la persona pel seu identificador
+		System.out.print("Introdueixi el ID de la persona a consultar: ");
 		Scanner stdin = new Scanner (System.in);
 				
 		seleccio = stdin.nextInt();
-		apuntador = (seleccio-1)*222;
+		apuntador = (seleccio-1)*126;
 		
 		if (apuntador >= aleatoriFile.length()) {
 			System.out.println("ERROR: ID incorrecte, no existeix aquest llibre");
-		} else {//Apuntar a l'inici del llibre seleccionat al fitxer
-			aleatoriFile.seek(apuntador);
-			id = aleatoriFile.readInt();//Llegeix ID
-			for(int i = 0; i<titol.length; i++) {//Llegeix T�tol
+		} else {//Apuntar a l'inici de la persona seleccionada al fitxer
+			aleatoriFile.seek(apuntador);//Apuntar a l'inici de cada persona al fitxer
+			//Llegeix ID
+			id = aleatoriFile.readInt();
+			//Llegeix Nom
+			for(int i = 0; i<nom.length; i++) {
 				aux = aleatoriFile.readChar();
-				titol[i] = aux;
+				nom[i] = aux;
 			}
-			String titols = new String(titol);
-			//Llegeix ISBN
-			isbn = aleatoriFile.readInt();
-			//Llegeix Autor
-			for(int i = 0; i<autor.length; i++) {
+			String noms = new String(nom);
+			//Llegeix Cognom
+			for(int i = 0; i<cognom.length; i++) {
 				aux = aleatoriFile.readChar();
-				autor[i] = aux;
+				cognom[i] = aux;
 			}
-			String autors = new String(autor);
-			//Llegeix Editorial
-			for(int i = 0; i<editorial.length; i++) {
+			String cognoms = new String(cognom);
+			//Llegeix Edat
+			for(int i = 0; i<edat.length; i++) {
 				aux = aleatoriFile.readChar();
-				editorial[i] = aux;
+				edat[i] = aux;
 			}
-			String editorials = new String(editorial);
-			//Llegeix Preu
-			preu = aleatoriFile.readFloat();
-			//Sortida de les dades de cada llibre
-			System.out.println("ID: "+id+"\nT�tol: "+titols+"\nISBN: "+isbn+"\nAutor: "+autors+"\nEditrorial: "+editorials+"\nPreu: "+preu+"�\n\n");
+			String edats = new String(edat);
+			//Llegeix Alçada
+			for(int i = 0; i<alçada.length; i++) {
+				aux = aleatoriFile.readChar();
+				alçada[i] = aux;
+			}
+			String alçades = new String(alçada);
+			//Llegeix Pes
+			for(int i = 0; i<pes.length; i++) {
+				aux = aleatoriFile.readChar();
+				pes[i] = aux;
+			}
+			String pesos = new String(pes);
+			//Sortida de les dades de cada persona
+			System.out.println("ID: "+id+"\nNom: "+noms+"\nCognoms: "+cognoms+"\nEdat: "+edats+"\nAlçada: "+alçades+"\nPes: "+pesos+"\n\n");
 		}
 		aleatoriFile.close();//Tancar el fitxer
 	}
