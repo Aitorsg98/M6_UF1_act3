@@ -4,49 +4,57 @@ import java.io.*;
 
 public class LleguirFitxerAleatori {
 	public static void main(String[] args) throws IOException {
-		File fitxer = new File("/home/pedro/Escriptori/llibres");
-		//Crea un flux (stream) d'arxiu d'accÈs aleatori nomÈs lectura
+		File fitxer = new File("persones.txt");
+		//Crea un flux (stream) d'arxiu d'acc√©s aleatori nom√©s lectura
 		RandomAccessFile aleatoriFile = new RandomAccessFile(fitxer, "r");
 		
 		//Apuntador s'inicialitza apuntant a l'inici del fitxer
-		int apuntador = 0, isbn, id;
-		float preu;
-		char titol[] = new char[50], autor[] = new char[25], editorial[] = new char[30], aux;
+		int apuntador = 0, id;
+		char nom[] = new char[20], cognom[] = new char[30], edat[] = new char[3], al√ßada[] = new char[4], pes[] = new char[4], aux;
 		
-		//Recorrer el fitxer llibres
+		//Recorrer el fitxer persones
 		for (;;) {
-			aleatoriFile.seek(apuntador);//Apuntar a l'inici de cada llibre al fitxer
+			aleatoriFile.seek(apuntador);//Apuntar a l'inici de cada persona al fitxer
 			//Llegeix ID
 			id = aleatoriFile.readInt();
-			//Llegeix TÌtol
-			for(int i = 0; i<titol.length; i++) {
+			//Llegeix Nom
+			for(int i = 0; i<nom.length; i++) {
 				aux = aleatoriFile.readChar();
-				titol[i] = aux;
+				nom[i] = aux;
 			}
-			String titols = new String(titol);
-			//Llegeix ISBN
-			isbn = aleatoriFile.readInt();
-			//Llegeix Autor
-			for(int i = 0; i<autor.length; i++) {
+			String noms = new String(nom);
+			//Llegeix Cognom
+			for(int i = 0; i<cognom.length; i++) {
 				aux = aleatoriFile.readChar();
-				autor[i] = aux;
+				cognom[i] = aux;
 			}
-			String autors = new String(autor);
-			//Llegeix Editorial
-			for(int i = 0; i<editorial.length; i++) {
+			String cognoms = new String(cognom);
+			//Llegeix Edat
+			for(int i = 0; i<edat.length; i++) {
 				aux = aleatoriFile.readChar();
-				editorial[i] = aux;
+				edat[i] = aux;
 			}
-			String editorials = new String(editorial);
-			//Llegeix Preu
-			preu = aleatoriFile.readFloat();
-			//Sortida de les dades de cada llibre
-			System.out.println("ID: "+id+"\nTÌtol: "+titols+"\nISBN: "+isbn+"\nAutor: "+autors+"\nEditrorial: 							"+editorials+"\nPreu: "+preu+"Ä\n\n");
-			//S'ha de posicionar l'apuntador al seg¸ent llibre
-			apuntador += 222;
-			//Si coincideix on s'est‡ apuntat amb el final del fitxer, sortim
+			String edats = new String(edat);
+			//Llegeix Al√ßada
+			for(int i = 0; i<al√ßada.length; i++) {
+				aux = aleatoriFile.readChar();
+				al√ßada[i] = aux;
+			}
+			String al√ßades = new String(al√ßada);
+			//Llegeix Pes
+			for(int i = 0; i<pes.length; i++) {
+				aux = aleatoriFile.readChar();
+				pes[i] = aux;
+			}
+			String pesos = new String(pes);
+			//Sortida de les dades de cada persona
+			System.out.println("ID: "+id+"\nNom: "+noms+"\nCognoms: "+cognoms+"\nEdat: "+edats+"\nAl√ßada: "+al√ßades+"\nPes: "+pesos+"\n\n");
+			//S'ha de posicionar l'apuntador a la seg√ºent persona.
+			apuntador += 126;
+			//Si coincideix on s'est√† apuntat amb el final del fitxer, sortim
 			if(aleatoriFile.getFilePointer()==aleatoriFile.length()) break;
 		}
 		aleatoriFile.close();//Tancar el fitxer
 	}
 }
+
